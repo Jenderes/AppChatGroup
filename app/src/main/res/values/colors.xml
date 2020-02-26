@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#616784</color>
+    <color name="colorPrimaryDark">#4c526d</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="ColorWhite">#ffffff</color>
+    <color name="background_dark">#117700</color>
+    <color name="background_bar">#047C80</color>
+    <color name="gray_color">#CDD5D5</color>
+    <color name="light_gray_color">#DDDDDD</color>
+    <color name="add_people">#AEFEA5</color>
+</resources>

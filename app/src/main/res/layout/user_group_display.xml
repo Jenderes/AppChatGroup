@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content" >
+    <LinearLayout
+        android:id="@+id/linear_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
+        <ImageView
+            android:id="@+id/user_group_image"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_profile"
+            android:contentDescription="image_group"
+            android:layout_marginRight="20dp"
+            />
+        <RelativeLayout
+            android:id="@+id/relative_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/user_group_image">
+            <TextView
+                android:id="@+id/profile_name_group"
+                android:layout_width="230dp"
+                android:layout_height="30dp"
+                android:text="Имя пользователя"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:gravity="center"/>
+            <TextView
+                android:id="@+id/status_name_group"
+                android:layout_below="@id/profile_name_group"
+                android:layout_width="230dp"
+                android:layout_height="30dp"
+                android:text="User nickname"
+                android:textSize="14dp"
+                android:gravity="center"/>
+        </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/linear_button_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/relative_group"
+            android:layout_marginTop="10dp"
+            android:gravity="center">
+            <ImageButton
+                android:id="@+id/imagebutton_group"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/tick"
+                android:visibility="invisible"
+                />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

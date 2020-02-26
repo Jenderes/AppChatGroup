@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:title="Поиск пользователя"
+        android:id="@+id/main_friend_options"
+        app:showAsAction="never">
+    </item>
+    <item
+        android:title="Создать беседу"
+        android:id="@+id/main_create_group_options"
+        app:showAsAction="never">
+    </item>
+    <item
+        android:title="Натсройки"
+        android:id="@+id/main_settings_options"
+        app:showAsAction="never"
+        >
+    </item>
+    <item
+        android:title="Выход"
+        android:id="@+id/main_logout_options"
+        app:showAsAction="never"
+        >
+    </item>
+</menu>
