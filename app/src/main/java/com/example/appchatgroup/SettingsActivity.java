@@ -92,7 +92,7 @@ public class SettingsActivity extends AppCompatActivity {
         setSupportActionBar(SettingsToolBar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
-        getSupportActionBar().setTitle("Account Settings");
+        getSupportActionBar().setTitle("Настройки аккаунта");
     }
 
     @Override
