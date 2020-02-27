@@ -62,21 +62,6 @@ public class GroupsFragment extends Fragment {
         currentUserID = mAuth.getCurrentUser().getUid();
         GroupRef = FirebaseDatabase.getInstance().getReference().child("Groups");
         UserGroupRef = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserID).child("groups");
-//        IntializeField();
-//
-//        RetrieveAndDisplayGroups();
-//
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                String currentGroupName = adapterView.getItemAtPosition(i).toString();
-//
-//                Intent groupChatIntent = new Intent(getContext(),GroupChatActivity.class);
-//                groupChatIntent.putExtra("GroupName",currentGroupName);
-//                startActivity(groupChatIntent);
-//            }
-//        });
-
         return groupfragmentView;
     }
 
@@ -90,13 +75,14 @@ public class GroupsFragment extends Fragment {
         FirebaseRecyclerAdapter<Contacts,GroupListViewHolder> adapter =
                 new FirebaseRecyclerAdapter<Contacts, GroupListViewHolder>(options) {
                     @Override
-                    protected void onBindViewHolder(@NonNull final GroupListViewHolder groupListViewHolder, int i, @NonNull Contacts contacts) {
+                    protected void onBindViewHolder(@NonNull final GroupListViewHolder groupListViewHolder, final int i, @NonNull Contacts contacts) {
                         String GroupIDs =  getRef(i).getKey();
                         GroupRef.child(GroupIDs).addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 if (dataSnapshot.exists()){
                                     String groupname = dataSnapshot.child("name").getValue().toString();
+                                    listGroups.add(groupname);
                                     groupListViewHolder.GroupName.setText(groupname);
                                 }
                             }
@@ -104,6 +90,16 @@ public class GroupsFragment extends Fragment {
                             @Override
                             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+                            }
+                        });
+                        groupListViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                String GroupIDs =  getRef(i).getKey();
+                                Intent groupIntent = new Intent(getContext(),GroupChatActivity.class);
+                                groupIntent.putExtra("visit_group_id",GroupIDs);
+                                groupIntent.putExtra("visit_group_name",listGroups.get(i));
+                                startActivity(groupIntent);
                             }
                         });
                     }
@@ -119,34 +115,6 @@ public class GroupsFragment extends Fragment {
         recyclerGroup.setAdapter(adapter);
         adapter.startListening();
     }
-    //    private void IntializeField() {
-//          listView = (ListView)groupfragmentView.findViewById(R.id.list_view);
-//          arrayAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,listGroups);
-//          listView.setAdapter(arrayAdapter);
-//
-//    }
-
-//    private void RetrieveAndDisplayGroups() {
-//        GroupRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                Set<String> set = new HashSet<>();
-//                Iterator iterator = dataSnapshot.getChildren().iterator();
-//
-//                while (iterator.hasNext()){
-//                    set.add(((DataSnapshot)iterator.next()).getKey());
-//                }
-//                listGroups.clear();
-//                listGroups.addAll(set);
-//                arrayAdapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
-//    }
 
     public static class GroupListViewHolder extends RecyclerView.ViewHolder {
         TextView GroupName;

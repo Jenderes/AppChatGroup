@@ -38,20 +38,19 @@ public class GroupChatActivity extends AppCompatActivity {
     private ScrollView mScrollView;
 
     private FirebaseAuth mAuth;
-    private String currentGroupName,currentUserID,currentUserName,currentDate,currentTime;
+    private String currentGroupID,currentUserID,currentUserName,currentDate,currentTime;
     private DatabaseReference usersRef,GroupNameRef,GroupMessageKeyRef;
-
+    private String nameGroup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_chat);
-
         mAuth = FirebaseAuth.getInstance();
         currentUserID = mAuth.getCurrentUser().getUid();
-        currentGroupName = getIntent().getExtras().get("GroupName").toString();
+        currentGroupID = getIntent().getExtras().get("visit_group_id").toString();
         usersRef = FirebaseDatabase.getInstance().getReference().child("Users");
-        GroupNameRef = FirebaseDatabase.getInstance().getReference().child("Groups").child(currentGroupName);
-        Toast.makeText(GroupChatActivity.this, currentGroupName, Toast.LENGTH_SHORT).show();
+        GroupNameRef = FirebaseDatabase.getInstance().getReference().child("Groups").child(currentGroupID).child("chats");
+        nameGroup = getIntent().getExtras().get("visit_group_name").toString();
         IntializeFields();
         GetUserInfo();
         SendMessageButton.setOnClickListener(new View.OnClickListener() {
@@ -103,7 +102,7 @@ public class GroupChatActivity extends AppCompatActivity {
     private void IntializeFields() {
         mToolbar = (Toolbar)findViewById(R.id.group_chat_bar_layout);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle(currentGroupName);
+        getSupportActionBar().setTitle(nameGroup);
 
         SendMessageButton = (ImageButton)findViewById(R.id.send_message_button);
         TextSendMessage = (EditText)findViewById(R.id.input_group_message);
@@ -159,6 +158,7 @@ public class GroupChatActivity extends AppCompatActivity {
         Iterator iterator = dataSnapshot.getChildren().iterator();
 
         while (iterator.hasNext()){
+            
             String chatDate = (String)((DataSnapshot)iterator.next()).getValue();
             String chatMessage = (String)((DataSnapshot)iterator.next()).getValue();
             String chatName = (String)((DataSnapshot)iterator.next()).getValue();
